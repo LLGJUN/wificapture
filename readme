@@ -1,0 +1,15 @@
+==============================================================================================
+2017/07/10 , By LINJUNJI at Sun Yat-sen UNIVERSITY 
+==============================================================================================
+1.The time zone in raspberry system is Greenwich Mean Time(GMT) ,which is 8 hours ahead of 
+Beijing Time.
+2.The captured file will be saved ,will  be named as format like 'file+date-+time.cap',and can be 
+opened by wireshark and omnipeek solfware. In order to avoid the oversize file , each file will 
+not contain more than 100000 records.  
+3.The file named CAPTURE.COF is a configuration file,where you can change the server address and 
+transmission port if you want to transfer your data into server ,and you can change the captured 
+channel and wifi interface name.There are 2 options for the channel option ,channel num(1,2,3..) 
+and auto (it means the program will change all 2.4GHZ channels by itself ).
+4.The program only achieve probe-request-frame-captured function,and the next step is to 
+realized more functions.
+===============================================================================================

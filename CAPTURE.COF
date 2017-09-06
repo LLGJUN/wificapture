@@ -1,0 +1,5 @@
+[ConfigInfo]
+ip 139.199.172.221
+port 4000
+channel 2
+interface wlan1
