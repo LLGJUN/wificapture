@@ -82,8 +82,25 @@ struct wlan_frame{
 		}__attribute__ ((packed)) addr4_qos_ht;
 	}u;
 }__attribute__ ((packed));
-
-
+/*
+void  intohexchar(uint8_t *ra) // turn int mac address to string mac address
+{
+	char hex_char[16]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+	char hexstring[10]={0};
+	char char1;
+	char char2;
+	char char3=':';
+	int i=0;
+	for(i=0;i<6;i++)
+	{
+		char1=hex_char[*(ra+i)/16];
+		char2=hex_char[*(ra+i)%16];
+		//sprintf(hexstring," %c,%c  ",char1,char2);
+		//if(i!=5)
+			//hexstring=strncat(hexstring,&char3,1);
+	}
+	//return hexstring[10];
+}*/
 int parse_wifi_packet(char *buffer,int len)
 {
 	int radiotap_len;  //the length of raditaphead of the wifi packet 
@@ -92,6 +109,8 @@ int parse_wifi_packet(char *buffer,int len)
 	uint8_t* ta=NULL;
 	uint8_t* bssid=NULL;
 	int i;
+	char macaddress[18]={0};
+	char *mymac="20:82:c0:1e:c2:3d";
 	
 	struct ieee80211_radiotap_header* radiotap_header=NULL;
 	struct wlan_frame* wfram_head =NULL;
@@ -157,9 +176,18 @@ int parse_wifi_packet(char *buffer,int len)
 			ta=wfram_head->addr2;
 			bssid=wfram_head->addr3;
 			printf("probe request frame   ");
-			/*
+
 			if(ta)
+			{
 				printf("Src MAC:%02x:%02x:%02x:%02x:%02x:%02x     ",*ta,*(ta+1),*(ta+2),*(ta+3),*(ta+4),*(ta+5));
+				sprintf(macaddress,"%02x:%02x:%02x:%02x:%02x:%02x",*ta,*(ta+1),*(ta+2),*(ta+3),*(ta+4),*(ta+5));
+				//intohexchar(ra);
+				if(strcasecmp(macaddress,mymac)==0)
+					return 3;
+				else 
+					return	-1;
+			}
+			/*
 			if(ra)
 			{
 				printf("Dst MAC:%02x:%02x:%02x:%02x:%02x:%02x      ",*ra,*(ra+1),*(ra+2),*(ra+3),*(ra+4),*(ra+5));
